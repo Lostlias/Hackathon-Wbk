@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: SensorlessTrackingApplication
+    working_dir: /usr/src/app
+    environment:
+      - STATION_NAME=Screwer1 (Manual)
+      - BROKER_IP=172.22.192.101
+    ports:
+      - 8000:8000

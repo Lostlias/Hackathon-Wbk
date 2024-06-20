@@ -4,19 +4,30 @@ import os
 import sys
 import aiomqtt
 
-BROKER_IP = "172.22.192.101"
+PRODUCT_ARRIVED_STATUS_MESSAGE = "arrived"
+PRODUCT_IN_PROGRESS_STATUS_MESSAGE = "in_progress"
+PRODUCT_FINISHED_STATUS_MESSAGE = "finished"
+PRODUCT_IDLE_STATUS_MESSAGE = "idle"
+
 TOPIC_NAME = "ProductStatus"
-
 STATION_NAME = os.getenv('STATION_NAME')
+BROKER_IP = os.getenv('BROKER_IP')
 
-def handleArrived():
-    # Send Message
+async def handleArrived():
+    await sendMessage(PRODUCT_ARRIVED_STATUS_MESSAGE)
 
-    # Handle Lights
+
+async def handleInProgress():
+    await sendMessage(PRODUCT_IN_PROGRESS_STATUS_MESSAGE)
+
+
+async def handleFinished():
+    await sendMessage(PRODUCT_FINISHED_STATUS_MESSAGE)
+
+
+async def handleIdleAgain():
     pass
 
-def handleIdleAgain():
-    pass
 
 async def sendMessage(status):
     payload = {
