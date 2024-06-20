@@ -1,0 +1,53 @@
+import time
+import threading
+
+class EventWithCountdown:
+    def __init__(self, countdown_time):
+        self.countdown_time = countdown_time
+        self.event_active = False
+        self.timer = countdown_time
+        self.lock = threading.Lock()
+        
+    def start_event(self, event_duration):
+        self.event_active = True
+        event_thread = threading.Thread(target=self._run_event, args=(event_duration,))
+        countdown_thread = threading.Thread(target=self._countdown)
+        
+        event_thread.start()
+        countdown_thread.start()
+        
+        event_thread.join()
+        countdown_thread.join()
+        
+        print("Both countdown and event are complete!")
+        
+    def _run_event(self, duration):
+        print("Event started!")
+        time.sleep(duration)
+        with self.lock:
+            self.event_active = False
+        print("Event finished!")
+    
+    def _countdown(self):
+        while True:
+            with self.lock:
+                if not self.event_active:
+                    break
+                if self.timer <= 0:
+                    print("Countdown finished!")
+                    break
+            
+            mins, secs = divmod(self.timer, 60)
+            time_format = '{:02d}:{:02d}'.format(mins, secs)
+            print(time_format, end='\r')
+            time.sleep(1)
+            with self.lock:
+                self.timer -= 1
+
+# Example usage
+if __name__ == "__main__":
+    countdown_time = 20  # Countdown time in seconds
+    event_duration = 10  # Event duration in seconds
+
+    event_with_countdown = EventWithCountdown(countdown_time)
+    event_with_countdown.start_event(event_duration)

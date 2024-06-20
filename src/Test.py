@@ -57,10 +57,14 @@ async def main():
     ## subscribing
     async with aiomqtt.Client(url) as client:
 
-        await client.subscribe("station/Screwer1 (Manual)/#")
+        await client.subscribe("station/Joiner2 (Manual)/#")
 
         async for message in client.messages:
             dict_message = json.loads(message.payload)
+            # TODO: check for correct dict message and break
+            #if dic message 
+            #if dict_message["dataTranslation"] == "Joiner2 ":
+               # break
             print(dict_message)
 
 
