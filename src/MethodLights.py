@@ -20,6 +20,7 @@ async def changeLights(portId, color):
         "sentAt": "2024-06-20T11:48:16.251293113Z",
 
     }
+    print(payload)
     
     return payload 
 

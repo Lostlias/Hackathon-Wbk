@@ -1,12 +1,10 @@
 import asyncio
+import asyncio
 import json
 import os
 import sys
 import aiomqtt
 import MethodLights
-
-
-
 
 async def main():
 
@@ -17,31 +15,44 @@ async def main():
     payload = {
 
         "stationId": "Screwer1 (Manual)",
+
         "portId": "2",
+
         "segmentId": "all",
-        "dataTranslation": {"color": "red", "blink": False, "blinkMode": "0"},
+
+        "dataTranslation": {"color": "green", "blink": False, "blinkMode": "0"},
+
         "sentAt": "2024-06-20T11:48:16.251293113Z",
     }
-    
+
     print("hello")
-    
-    ##publish 
+    print(payload)
+
+    ##publish2 
     async with aiomqtt.Client(url) as client:
 
-        await client.publish("station/Screwer1 (Manual)", "hello")
+        await client.publish("station", "hello")
 
-    print("published hello")
+    print("published2 ok")
     
-    
-    ##change light 
-    #payload = MethodLights.changeLights(2, "green")
+    ## publishing
     payload_json = json.dumps(payload)
+
     async with aiomqtt.Client(url) as client:
 
-       await client.publish(topic, payload=payload_json)
+        await client.publish(topic, payload=payload_json)
+
+    print("published1")
+ 
+    ##change light 
+    payloadNew = await MethodLights.changeLights(2, "red")
+    payload_json2 = json.dumps(payloadNew)
+    async with aiomqtt.Client(url) as client:
+
+       await client.publish(topic, payload=payload_json2)
     
     print("klappt es?")
-       
+    
 
     ## subscribing
     async with aiomqtt.Client(url) as client:
