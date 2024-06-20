@@ -4,64 +4,29 @@ import os
 import sys
 import aiomqtt
 
+##portId = 2
+##color = "red"
 
+async def changeLights(portId, color):
 
-async def main():
-
-    url = "172.22.192.101"
-    topic = "station/Screwer1 (Manual)/io_link/ports/2/data_translation/status_light"
+    #url = "172.22.192.101"
+    #topic = "station/Screwer1 (Manual)/io_link/ports/2/data_translation/status_light"   ##change to 'Joining 2 (Manual)'
     payload = {
 
-        "stationId": "Screwer1 (Manual)",
-        "portId": "2",
+        "stationId": "Screwer1 (Manual)",       ##change to 'Joining 2 (Manual)'
+        "portId": portId,
         "segmentId": "all",
-        "dataTranslation": {"color": "green", "blink": False, "blinkMode": "0"},
+        "dataTranslation": {"color": color, "blink": False, "blinkMode": "0"},
         "sentAt": "2024-06-20T11:48:16.251293113Z",
 
     }
-
-
-
+    
+    return payload 
 
     ## publishing
+    #payload_json = json.dumps(payload)
+    #async with aiomqtt.Client(url) as client:
 
-    payload_json = json.dumps(payload)
+     #   await client.publish(topic, payload=payload_json)
 
-
-
-
-    
-
-    async with aiomqtt.Client(url) as client:
-
-        await client.publish(topic, payload=payload_json)
-
-
-
-
-    ## subscribing
-
-    async with aiomqtt.Client(url) as client:
-
-        await client.subscribe("station/#")
-
-        async for message in client.messages:
-
-            print(message.payload)
-
-
-
-
-if sys.platform.lower() == "win32" or os.name.lower()== "nt":
-
-    from asyncio import set_event_loop_policy, WindowsSelectorEventLoopPolicy
-
-    set_event_loop_policy(WindowsSelectorEventLoopPolicy())
-
-
-
-
-
-
-
-asyncio.run(main())
+    print("change lights")
