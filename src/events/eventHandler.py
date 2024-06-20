@@ -7,6 +7,7 @@ import datetime
 import utils.light_control as lc
 import utils.utils as u
 from StationHandler import StationHandler
+import time
 
 PRODUCT_ARRIVED_STATUS_MESSAGE = os.getenv('PRODUCT_ARRIVED_STATUS_MESSAGE')
 PRODUCT_IN_PROGRESS_STATUS_MESSAGE = os.getenv('PRODUCT_IN_PROGRESS_STATUS_MESSAGE')
@@ -27,8 +28,10 @@ async def handleArrived(): # Ruft
     #stationHander.addExpected(1) # TODO: remove dummy value
 
     # Change light to yellow
-    # token = u.get_token(STATION_IP)
-    # lc.ampel_orange(STATION_IP, LEFT_LIGHT, token)
+    token = u.get_token(STATION_IP)
+    lc.ampel_orange(STATION_IP, LEFT_LIGHT, token)
+
+    time.sleep(10)
 
 
 async def handleInProgress(nfc_id):
