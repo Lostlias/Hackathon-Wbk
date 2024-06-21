@@ -20,6 +20,6 @@ services:
       - PRODUCT_LEFT_STATION_STATUS_MESSAGE=left
       - PRODUCT_IDLE_STATUS_MESSAGE=idle
       - STATUS_TOPIC_NAME=productStatusUpdate
-      - RFID_TOPIC_NAME=rfidStatusUpdate
+      - RFID_TOPIC_NAME=rfid
     ports:
       - 8000:8000

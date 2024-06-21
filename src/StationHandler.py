@@ -27,4 +27,4 @@ class StationHandler:
         return self.finish.len()
 
     def isIdle() -> bool:
-        return (leftQueueLen() + rightQueueLen()) == 0
+        return (self.leftQueueLen() + self.rightQueueLen()) == 0
