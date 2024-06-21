@@ -34,7 +34,7 @@ async def expecting_item_listener(expecting_items_queue, TOPIC):
 
 
 async def listen_to_ai(eventHandler):
-    url = "station/" + TOPIC
+    url = "station/" + STATION_NAME + "/" + TOPIC
 
     async with aiomqtt.Client(BROKER_IP) as client:
         await client.subscribe(url)
@@ -49,7 +49,7 @@ async def listen_to_ai(eventHandler):
                 await eventHandler.handleLeftStation()
 
 
-async def reading_nfc(data_queue, eHandler: eventHandler):
+async def reading_nfc(eHandler: eventHandler):
     # Listening for messages of RFID readers
     url = "station/" + STATION_NAME + "/io_link/ports/" + RFID_READER_PORT + "/data_translation/" + RFID_TOPIC_NAME
 
