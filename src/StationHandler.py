@@ -20,11 +20,11 @@ class StationHandler:
     def send(self, send_item_id: int):
         self.finish.remove(left)
     
-    def leftQueueLen() -> int:
+    def leftQueueLen(self) -> int:
         return self.expected.len() + self.confirm.len()
     
-    def rightQueueLen() -> int:
+    def rightQueueLen(self) -> int:
         return self.finish.len()
 
-    def isIdle() -> bool:
+    def isIdle(self) -> bool:
         return (self.leftQueueLen() + self.rightQueueLen()) == 0
