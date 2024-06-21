@@ -27,10 +27,17 @@ async def expecting_item_listener(expecting_items_queue):
 
 
 async def reading_nfc(data_queue):
-    # Listening for messages of RFID readers
-    async with aiomqtt.Client(BROKER_IP) as client:
-        await client.subscribe(RFID_TOPIC)
-        async for message in client.messages:
-            m = json.loads(message)
+    print("Starting RFID Loop")
+    while True:
+        data = readRFID(STATION_IP, RFID_READER_PORT)
+        data_queue.put(data)
 
-            data_queue.put(m)
+        time.sleep(0.5)
+
+    # Listening for messages of RFID readers
+    # async with aiomqtt.Client(BROKER_IP) as client:
+    #    await client.subscribe(RFID_TOPIC)
+    #    async for message in client.messages:
+    #        m = json.loads(message)
+
+    #        data_queue.put(m)

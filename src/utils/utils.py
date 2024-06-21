@@ -40,7 +40,7 @@ def convert_bitarray_to_int(bits: str) -> int:
 # noinspection HttpUrlsUsage
 def get_token(ip):
     # gibt Bearer Token des angeschlossenen IO-Masters zurück
-    ip = "172.22.192.101"
+    
     url = "http://" + ip + "/api/balluff/v1/users/login"
     head = {"username": "admin", "password": "BNIEIP"}
     response = requests.post(url, json=head)
