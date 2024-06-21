@@ -48,7 +48,7 @@ class eventHandler:
         lc.ampel_grün(self.STATION_IP, self.LEFT_LIGHT, token)
 
         # If no items are finished show only green
-        if stationHander.rightQueueLen() == 0:
+        if self.stationHander.rightQueueLen() == 0:
             lc.ampel_grün(self.STATION_IP, self.RIGHT_LIGHT, token)
 
 
@@ -70,11 +70,11 @@ class eventHandler:
         self.stationHander.send(predicted_product_id)
 
         # Change light
-        tocke = u.get_token(self.STATION_IP)
+        token = u.get_token(self.STATION_IP)
         lc.ampel_aus(self.STATION_IP, self.RIGHT_LIGHT, token)
 
         # Last item has left the station
-        if stationHander.isIdle():
+        if self.stationHander.isIdle():
             handleIdleAgain()
 
 
