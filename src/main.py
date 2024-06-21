@@ -14,11 +14,13 @@ async def main():
     task2 = asyncio.create_task(ml.reading_nfc(data_queue, eHandler))
     # task3 = asyncio.create_task(ml.expecting_item_listener(data_queue))
     # task4 = asyncio.create_task(ai.startAI())
+    task5 = asyncio.create_task(ml.listen_to_ai(eHandler))
 
     #await task1
     await task2
     # await task3
     # await task4
+    await task5
 
 
 if __name__ == "__main__":
