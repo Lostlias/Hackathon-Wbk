@@ -34,7 +34,7 @@ async def expecting_item_listener(expecting_items_queue, TOPIC):
 
 
 async def listen_to_ai(eventHandler):
-    url = "station/" + STATION_NAME + "/" + TOPIC
+    url = "station/" + TOPIC
 
     async with aiomqtt.Client(BROKER_IP) as client:
         await client.subscribe(url)
