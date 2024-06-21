@@ -13,6 +13,7 @@ STATION_IP = os.getenv('STATION_IP')
 BROKER_IP = os.getenv('BROKER_IP')
 RFID_READER_PORT = os.getenv('RFID_READER_PORT')
 TOPIC = os.getenv('STATUS_TOPIC_NAME')
+RFID_TOPIC = os.getenv('RFID_TOPIC_NAME')
 
 async def expecting_item_listener(expecting_items_queue):
     # Listening for messages of finished products from station befor
@@ -24,3 +25,12 @@ async def expecting_item_listener(expecting_items_queue):
             if m.get('status') == 'finished':
                 expecting_items_queue.put(m.get('productID'))
 
+
+async def reading_nfc(data_queue):
+    # Listening for messages of RFID readers
+    async with aiomqtt.Client(BROKER_IP) as client:
+        await client.subscribe(RFID_TOPIC)
+        async for message in client.messages:
+            m = json.loads(message)
+
+            data_queue.put(m)
