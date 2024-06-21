@@ -9,13 +9,15 @@ services:
     working_dir: /usr/src/app
     environment:
       - STATION_NAME=Joiner2 (Manual)
-      - STATION_IP=172.22.192.101
+      - STATION_IP=192.168.122.8
       - BROKER_IP=172.22.192.101
       - LEFT_LIGHT_PORT=1
       - RIGHT_LIGHT_PORT=2
+      - RFID_READER_PORT=3
       - PRODUCT_ARRIVED_STATUS_MESSAGE=arrived
       - PRODUCT_IN_PROGRESS_STATUS_MESSAGE=in_progress
       - PRODUCT_FINISHED_STATUS_MESSAGE=finished
+      - PRODUCT_LEFT_STATION_STATUS_MESSAGE=left
       - PRODUCT_IDLE_STATUS_MESSAGE=idle
       - STATUS_TOPIC_NAME=productStatusUpdate
     ports:

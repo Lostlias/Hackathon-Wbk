@@ -8,6 +8,7 @@ async def main():
 
     # Create needed tasks
     #asyncio.create_task(ml.expecting_item_listener(data_queue=expecting_items_queue))
+    asyncio.create_task(ml.reading_nfc())
 
     await e.handleArrived()
 

@@ -5,20 +5,26 @@ class StationHandler:
         self.confirmed = []
         self.finished = []
     
-    def addExpected(self, expected: int):
-        print(f"Added expected Value: {expected}")
-        self.expected.append(expected)
+    def addExpected(self, expected_item_id: int):
+        print(f"Added expected Value: {expected_item_id}")
+        self.expected.append(expected_item_id)
     
-    def confirm(self, confirmed: int):
-        self.expected.remove(confirmed)
-        self.confirmed.append(confirmed)
+    def confirm(self, confirmed_item_item: int):
+        self.expected.remove(confirmed_item_item)
+        self.confirmed.append(confirmed_item_item)
     
-    def finish(self, finished: int):
-        self.confirmed.remove(finished)
-        self.finish.append(finished)
+    def finish(self, finished_item_id: int):
+        self.confirmed.remove(finished_item_id)
+        self.finish.append(finished_item_id)
+    
+    def send(self, send_item_id: int):
+        self.finish.remove(left)
     
     def leftQueueLen() -> int:
         return self.expected.len() + self.confirm.len()
     
     def rightQueueLen() -> int:
         return self.finish.len()
+
+    def isIdle() -> bool:
+        return (leftQueueLen() + rightQueueLen()) == 0

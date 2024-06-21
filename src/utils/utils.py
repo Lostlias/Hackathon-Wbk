@@ -40,7 +40,7 @@ def convert_bitarray_to_int(bits: str) -> int:
 # noinspection HttpUrlsUsage
 def get_token(ip):
     # gibt Bearer Token des angeschlossenen IO-Masters zurück
-
+    ip = "172.22.192.101"
     url = "http://" + ip + "/api/balluff/v1/users/login"
     head = {"username": "admin", "password": "BNIEIP"}
     response = requests.post(url, json=head)
@@ -53,3 +53,11 @@ def get_token(ip):
     output = output.replace('"', "")
     print(output)
     return output
+
+def readRFID(ip, port):
+    try:
+        url = "http://" + ip + "/iolink/v1/devices/master1port" + port + "/processdata/value"
+        response = requests.get(url)
+        return response.content
+    except BaseException:
+        print("Could not read RFID-Tag")
