@@ -25,7 +25,8 @@ class eventHandler:
         self.RIGHT_LIGHT = os.getenv('RIGHT_LIGHT_PORT')
         self.stationHander = StationHandler()
 
-    async def handleArrived(self): # Ruft 
+    async def handleArrived(self): # Ruft
+        print("HANDLE: arrived product")
         # TODO: implement prediction system that knows which products left the previous station
         predicted_product_id = None    
 
@@ -39,6 +40,7 @@ class eventHandler:
 
 
     async def handleInProgress(self, product_id):
+        print("HANDLE: product in process")
         await self.sendStatusMessage(self.PRODUCT_IN_PROGRESS_STATUS_MESSAGE, product_id)
 
         self.stationHander.confirm(product_id)
@@ -53,6 +55,7 @@ class eventHandler:
 
 
     async def handleFinished(self, product_id):
+        print(f"HANDLE: finishing product | id: {product_id}")
         await self.sendStatusMessage(self.PRODUCT_FINISHED_STATUS_MESSAGE, product_id)
 
         self.stationHander.finish(product_id)
@@ -63,6 +66,7 @@ class eventHandler:
 
 
     async def handleLeftStation(self):
+        print("HANDLE: leaving product")
         predicted_product_id = None
 
         await self.sendStatusMessage(self.PRODUCT_LEFT_STATION_STATUS_MESSAGE, predicted_product_id)

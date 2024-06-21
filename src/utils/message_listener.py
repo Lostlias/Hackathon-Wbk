@@ -27,7 +27,7 @@ async def expecting_item_listener(expecting_items_queue, TOPIC):
         async for message in client.messages:
             m = json.loads(message.payload)
 
-            print("PRODUCT UPDATE RECEIVED: '{m}'")
+            print(f"PRODUCT UPDATE RECEIVED: '{m}'")
 
             if m.get('status') == 'finished':
                 expecting_items_queue.put(m.get('productID'))
@@ -41,7 +41,7 @@ async def listen_to_ai(eventHandler):
         async for message in client.messages:
             m = json.loads(message.payload)
 
-            print("STATION AI UPDATE RECEIVED: '{m}'")
+            print(f"STATION AI UPDATE RECEIVED: '{m}'")
 
             if m.get('status') == 'arrived':
                 await eventHandler.handleArrived()
@@ -58,7 +58,7 @@ async def reading_nfc(eHandler: eventHandler):
         async for message in client.messages:
             m = json.loads(message.payload)
 
-            print("RFID READER UPDATE RECEIVED: '{m}'")
+            print(f"RFID READER UPDATE RECEIVED: '{m}'")
 
             if m.get('dataTranslation').get('event') == 'IN':
                 value = m.get('dataTranslation').get('partID')

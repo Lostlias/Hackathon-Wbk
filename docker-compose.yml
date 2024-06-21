@@ -11,8 +11,8 @@ services:
       - STATION_NAME=Joiner2 (Manual)
       - STATION_IP=192.168.122.8
       - BROKER_IP=172.22.192.101
-      - LEFT_LIGHT_PORT=1
-      - RIGHT_LIGHT_PORT=2
+      - LEFT_LIGHT_PORT=2
+      - RIGHT_LIGHT_PORT=1
       - RFID_READER_PORT=3
       - PRODUCT_ARRIVED_STATUS_MESSAGE=arrived
       - PRODUCT_IN_PROGRESS_STATUS_MESSAGE=in_progress
