@@ -24,13 +24,3 @@ async def expecting_item_listener(expecting_items_queue):
             if m.get('status') == 'finished':
                 expecting_items_queue.put(m.get('productID'))
 
-
-async def reading_nfc():
-    # Periodically checking the RFID reader for status updates
-    token = get_token(STATION_IP)
-    while True:
-        data = readRFID(STATION_IP, RFID_READER_PORT)
-
-        print(data)
-
-        time.sleep(0.5)

@@ -53,11 +53,3 @@ def get_token(ip):
     output = output.replace('"', "")
     print(output)
     return output
-
-def readRFID(ip, port):
-    try:
-        url = "http://" + ip + "/iolink/v1/devices/master1port" + port + "/processdata/value"
-        response = requests.get(url)
-        return response.content
-    except BaseException:
-        print("Could not read RFID-Tag")
