@@ -21,10 +21,10 @@ class StationHandler:
         self.finished.remove(left)
     
     def leftQueueLen(self) -> int:
-        return self.expected.len() + self.confirmed.len()
+        return self.expected.len() + len(self.confirmed)
     
     def rightQueueLen(self) -> int:
-        return self.finished.len()
+        return len(self.finished)
 
     def isIdle(self) -> bool:
         return (self.leftQueueLen() + self.rightQueueLen()) == 0
