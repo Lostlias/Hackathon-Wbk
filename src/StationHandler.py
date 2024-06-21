@@ -15,16 +15,16 @@ class StationHandler:
     
     def finish(self, finished_item_id: int):
         self.confirmed.remove(finished_item_id)
-        self.finish.append(finished_item_id)
+        self.finished.append(finished_item_id)
     
     def send(self, send_item_id: int):
-        self.finish.remove(left)
+        self.finished.remove(left)
     
     def leftQueueLen(self) -> int:
-        return self.expected.len() + self.confirm.len()
+        return self.expected.len() + self.confirmed.len()
     
     def rightQueueLen(self) -> int:
-        return self.finish.len()
+        return self.finished.len()
 
     def isIdle(self) -> bool:
         return (self.leftQueueLen() + self.rightQueueLen()) == 0
